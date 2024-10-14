@@ -1,0 +1,36 @@
+# Question 9845: Admin Department Employees Beginning in April or Later
+
+**Platform:** StrataScratch
+
+**Difficulty:** Easy
+
+**Problem Statement**
+
+Find the number of employees working in the Admin department that joined in April or later.
+
+### Table Structure
+
+Table: worker
+
+worker_id:        int
+first_name:      varchar
+last_name:       varchar
+salary:          int
+joining_date:    datetime
+department:      varchar
+
+### Solution Query
+
+SELECT COUNT(DISTINCT WORKER_ID)
+FROM worker
+WHERE DEPARTMENT = 'ADMIN' AND MONTH(JOINING_DATE) >= '4';
+
+### Explanation
+
+- **Purpose**: Counts the number of distinct workers in the 'ADMIN' department who joined in April or later.
+- **Selected Column**:
+  - `COUNT(DISTINCT WORKER_ID)`: Counts the unique `WORKER_ID`s, ensuring that each worker is only counted once.
+- **Data Source**: The data is pulled from the `worker` table.
+- **Filtering**:
+  - `WHERE DEPARTMENT = 'ADMIN'`: Filters the results to include only workers in the 'ADMIN' department.
+  - `AND MONTH(JOINING_DATE) >= '4'`: Further filters the results to include only those whose `JOINING_DATE` falls in April (month 4) or later.

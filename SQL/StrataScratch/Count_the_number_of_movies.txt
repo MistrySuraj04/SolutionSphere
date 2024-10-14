@@ -1,0 +1,36 @@
+# Question 10128: Count the number of movies that Abigail Breslin nominated for oscar
+
+**Platform:** StrataScratch
+
+**Difficulty:** Easy
+
+**Problem Statement**
+
+Count the number of movies that Abigail Breslin was nominated for an oscar.
+
+### Table Structure
+
+Table: oscar_nominees
+
+year:       int
+category:   varchar
+nominee:    varchar
+movie:      varchar
+winner:     bool
+id:         int
+
+### Solution Query
+
+SELECT COUNT(DISTINCT ID)
+FROM oscar_nominees
+WHERE nominee = 'Abigail Breslin';
+
+### Explanation
+
+- **Purpose**: Counts the number of unique nominations for the nominee 'Abigail Breslin' from the Oscar nominees dataset.
+- **Selected Column**:
+  - `COUNT(DISTINCT ID)`: Counts the distinct `ID`s, ensuring that each nomination is counted only once.
+- **Data Source**:
+  - `FROM oscar_nominees`: Pulls data from the `oscar_nominees` table.
+- **Filtering**:
+  - `WHERE nominee = 'Abigail Breslin'`: Filters the results to include only records for the nominee named 'Abigail Breslin'. This means that only nominations associated with her name will be counted.

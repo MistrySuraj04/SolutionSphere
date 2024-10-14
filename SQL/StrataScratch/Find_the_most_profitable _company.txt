@@ -1,0 +1,44 @@
+# Question 9663: Find the most profitable company in the financial sector of the entire world along with its continent
+
+**Platform:** StrataScratch
+
+**Difficulty:** Easy
+
+**Problem Statement**
+
+Find the most profitable company from the financial sector. Output the result along with the continent.
+
+### Table Structure
+
+Table: forbes_global_2010_2014
+
+company:          varchar
+sector:           varchar
+industry:         varchar
+continent:        varchar
+country:          varchar
+marketvalue:      float
+sales:            float
+profits:          float
+assets:           float
+rank:             int
+forbeswebpage:    varchar
+
+### Solution Query
+
+SELECT company, continent
+FROM forbes_global_2010_2014
+ORDER BY profits DESC
+LIMIT 1;
+
+### Explanation
+
+- **Purpose**: Retrieves the company with the highest profits from the Forbes Global dataset for the years 2010 to 2014.
+- **Selected Columns**:
+  - `company`: Selects the name of the company.
+  - `continent`: Selects the continent where the company is located.
+- **Data Source**: The data is pulled from the `forbes_global_2010_2014` table.
+- **Ordering**:
+  - `ORDER BY profits DESC`: Sorts the results in descending order based on the `profits` column, ensuring that the company with the highest profits appears first.
+- **Limiting Results**:
+  - `LIMIT 1`: Restricts the output to only the top result, which is the company with the highest profits.

@@ -1,0 +1,45 @@
+# Question  9972: Find the base pay for Police Captains
+
+**Platform:** StrataScratch
+
+**Difficulty:** Easy
+
+**Problem Statement**
+
+Find the base pay for Police Captains.
+Output the employee name along with the corresponding base pay.
+
+### Table Structure
+
+Table: sf_public_salaries
+
+id:                   int
+employeename:         varchar
+jobtitle:             varchar
+basepay:              float
+overtimepay:          float
+otherpay:             float
+benefits:             float
+totalpay:             float
+totalpaybenefits:     float
+year:                 int
+notes:                datetime
+agency:               varchar
+status:               varchar
+
+### Solution Query
+
+SELECT employeename, basepay
+FROM sf_public_salaries
+WHERE jobtitle LIKE '%CAPTAIN%';
+
+### Explanation
+
+- **Purpose**: Retrieves the names and base pay of employees whose job titles include the term 'CAPTAIN'.
+- **Selected Columns**:
+  - `employeename`: Selects the name of the employee.
+  - `basepay`: Selects the base pay of the employee.
+- **Data Source**:
+  - `FROM sf_public_salaries`: Pulls data from the `sf_public_salaries` table.
+- **Filtering**:
+  - `WHERE jobtitle LIKE '%CAPTAIN%'`: Filters the results to include only those records where the `jobtitle` contains the substring 'CAPTAIN'. The use of the wildcard `%` before and after 'CAPTAIN' allows for matching job titles that have additional characters before or after the word.

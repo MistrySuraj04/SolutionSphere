@@ -1,0 +1,44 @@
+# Question 9847: Number of Workers by Department Starting in April or Later
+
+**Platform:** StrataScratch
+
+**Difficulty:** Easy
+
+**Problem Statement**
+
+Find the number of workers by department who joined in or after April.
+Output the department name along with the corresponding number of workers.
+Sort records based on the number of workers in descending order.
+
+### Table Structure
+
+Table: worker
+
+worker_id:        int
+first_name:      varchar
+last_name:       varchar
+salary:          int
+joining_date:    datetime
+department:      varchar
+
+### Solution Query
+
+SELECT COUNT(DISTINCT WORKER_ID), DEPARTMENT
+FROM worker
+WHERE MONTH(JOINING_DATE) >= '4'
+GROUP BY DEPARTMENT
+ORDER BY 1 DESC;
+
+### Explanation
+
+- **Purpose**: Counts the number of distinct workers who joined in April or later, grouped by department.
+- **Selected Columns**:
+  - `COUNT(DISTINCT WORKER_ID)`: Counts the unique `WORKER_ID`s to ensure each worker is only counted once.
+  - `DEPARTMENT`: Selects the department to which the workers belong.
+- **Data Source**: The data is pulled from the `worker` table.
+- **Filtering**:
+  - `WHERE MONTH(JOINING_DATE) >= '4'`: Filters the results to include only those workers whose `JOINING_DATE` is in April (month 4) or later.
+- **Grouping**:
+  - `GROUP BY DEPARTMENT`: Groups the results by the `DEPARTMENT`, allowing the count of distinct workers to be calculated for each department.
+- **Ordering**:
+  - `ORDER BY 1 DESC`: Sorts the results in descending order based on the first selected column, which is the count of distinct workers.

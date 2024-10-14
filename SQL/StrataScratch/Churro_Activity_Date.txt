@@ -1,0 +1,51 @@
+# Question 9688: Churro Activity Date
+
+**Platform:** StrataScratch
+
+**Difficulty:** Easy
+
+**Problem Statement**
+
+Find the activity date and the pe_description of facilities with the name 'STREET CHURROS' and with a score of less than 95 points.
+
+### Table Structure
+
+Table: los_angeles_restaurant_health_inspections
+
+serial_number:             varchar
+activity_date:             datetime
+facility_name:             varchar
+score:                     int
+grade:                     varchar
+service_code:              int
+service_description:       varchar
+employee_id:               varchar
+facility_address:          varchar
+facility_city:             varchar
+facility_id:              varchar
+facility_state:            varchar
+facility_zip:              varchar
+owner_id:                  varchar
+owner_name:                varchar
+pe_description:            varchar
+program_element_pe:        int
+program_name:              varchar
+program_status:            varchar
+record_id:                 varchar
+
+### Solution Query
+
+SELECT activity_date, pe_description
+FROM los_angeles_restaurant_health_inspections
+WHERE facility_name = 'STREET CHURROS' and score < 95;
+
+### Explanation
+
+- **Purpose**: Retrieves health inspection records for the facility named 'STREET CHURROS' that have a score below 95.
+- **Selected Columns**:
+  - `activity_date`: Selects the date of the health inspection.
+  - `pe_description`: Selects the description of the inspection findings.
+- **Data Source**: The data is pulled from the `los_angeles_restaurant_health_inspections` table.
+- **Filtering**:
+  - `WHERE facility_name = 'STREET CHURROS'`: Filters the results to include only records for the facility named 'STREET CHURROS'.
+  - `and score < 95`: Further filters the results to include only inspections with a score of less than 95, indicating potential health violations or concerns.

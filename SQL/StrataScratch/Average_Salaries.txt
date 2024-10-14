@@ -1,0 +1,47 @@
+# Question 9917: Average Salaries
+
+**Platform:** StrataScratch
+
+**Difficulty:** Easy
+
+**Problem Statement**
+
+Compare each employee's salary with the average salary of the corresponding department.
+Output the department, first name, and salary of employees along with the average salary of that department.
+
+### Table Structure
+
+Table: employee
+
+id:                int
+first_name:       varchar
+last_name:        varchar
+age:              int
+sex:              varchar
+employee_title:   varchar
+department:       varchar
+salary:           int
+target:           int
+bonus:            int
+email:            varchar
+city:             varchar
+address:          varchar
+manager_id:       int
+
+### Solution Query
+
+SELECT e.department, e.first_name, e.salary, AVG(salary) over (PARTITION BY department)
+FROM employee as e;
+
+### Explanation
+
+- **Purpose**: Retrieves the department, employee first name, salary, and average salary for each department from the employee table.
+- **Selected Columns**:
+  - `e.department`: Selects the department of the employee.
+  - `e.first_name`: Selects the first name of the employee.
+  - `e.salary`: Selects the salary of the employee.
+  - `AVG(salary) OVER (PARTITION BY department)`: Calculates the average salary for each department using a window function. This average is computed for all employees within the same department.
+- **Data Source**:
+  - `FROM employee AS e`: Pulls data from the `employee` table and aliases it as `e`.
+- **Window Function**:
+  - `OVER (PARTITION BY department)`: This clause divides the result set into partitions (groups) by department. The average salary is then calculated for each partition, allowing you to see the average salary alongside each employee's individual salary within their respective department.

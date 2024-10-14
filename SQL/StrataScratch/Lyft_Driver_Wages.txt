@@ -1,0 +1,35 @@
+# Question 10003: Lyft Driver Wages
+
+**Platform:** StrataScratch
+
+**Difficulty:** Easy
+
+**Problem Statement**
+
+Find all Lyft drivers who earn either equal to or less than 30k USD or equal to or more than 70k USD.
+Output all details related to retrieved records.
+
+### Table Structure
+
+Table: lyft_drivers
+
+index:          int
+start_date:     datetime
+end_date:       datetime
+yearly_salary:  int
+
+### Solution Query
+
+SELECT *
+FROM lyft_drivers
+WHERE ( yearly_salary <= 30000 ) OR ( yearly_salary >= 70000 );
+
+### Explanation
+
+- **Purpose**: Retrieves all records of Lyft drivers whose yearly salary is either below or equal to $30,000 or above or equal to $70,000.
+- **Selected Columns**:
+  - `*`: Selects all columns from the `lyft_drivers` table.
+- **Data Source**:
+  - `FROM lyft_drivers`: Pulls data from the `lyft_drivers` table.
+- **Filtering**:
+  - `WHERE (yearly_salary <= 30000) OR (yearly_salary >= 70000)`: Filters the results to include only those records where the `yearly_salary` is either less than or equal to $30,000 or greater than or equal to $70,000. This condition allows for the selection of drivers with either low or high annual salaries, excluding those with salaries in the range between $30,001 and $69,999.

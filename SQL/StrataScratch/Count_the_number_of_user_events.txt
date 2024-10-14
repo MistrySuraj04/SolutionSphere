@@ -1,0 +1,44 @@
+# Question 9653: Count the number of user events performed by MacBookPro users
+
+**Platform:** StrataScratch
+
+**Difficulty:** Easy
+
+**Problem Statement**
+
+Count the number of user events performed by MacBookPro users.
+Output the result along with the event name.
+Sort the result based on the event count in the descending order.
+
+### Table Structure
+
+Table: playbook_events
+
+user_id:       int
+occurred_at:   datetime
+event_type:    varchar
+event_name:    varchar
+location:      varchar
+device:        varchar
+
+### Solution Query
+
+SELECT event_name, COUNT(user_id)
+FROM playbook_events
+WHERE device = 'macbook pro'
+GROUP BY event_name
+ORDER BY COUNT(user_id) DESC;
+
+### Explanation
+
+- **Purpose**: Counts the number of users for each event associated with the device type 'MacBook Pro'.
+- **Selected Columns**:
+  - `event_name`: Selects the name of the event.
+  - `COUNT(user_id)`: Counts the total number of unique users (`user_id`) associated with each event.
+- **Data Source**: The data is pulled from the `playbook_events` table.
+- **Filtering**:
+  - `WHERE device = 'macbook pro'`: Filters the results to include only events recorded on 'MacBook Pro' devices.
+- **Grouping**:
+  - `GROUP BY event_name`: Groups the results by `event_name`, allowing the count of users to be calculated for each event.
+- **Ordering**:
+  - `ORDER BY COUNT(user_id) DESC`: Sorts the results in descending order based on the count of users, so events with the highest user counts appear first.

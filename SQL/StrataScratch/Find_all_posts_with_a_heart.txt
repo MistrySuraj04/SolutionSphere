@@ -1,0 +1,39 @@
+# Question 10087: Find all posts which were reacted to with a heart
+
+**Platform:** StrataScratch
+
+**Difficulty:** Easy
+
+**Problem Statement**
+
+Find all posts which were reacted to with a heart. For such posts output all columns from facebook_posts table.
+
+### Table Structure
+
+Tables: facebook_reactions, facebook_posts
+
+poster:        int
+friend:        int
+reaction:      varchar
+date_day:      int
+post_id:       int
+
+### Solution Query
+
+SELECT DISTINCT POSTS.*
+FROM facebook_reactions AS REACTIONS
+JOIN facebook_posts AS POSTS ON REACTIONS.post_id = POSTS.post_id
+WHERE reaction = 'heart';
+
+### Explanation
+
+- **Purpose**: Retrieves distinct records of Facebook posts that have received a 'heart' reaction.
+- **Selected Columns**:
+  - `POSTS.*`: Selects all columns from the `facebook_posts` table.
+- **Data Source**:
+  - `FROM facebook_reactions AS REACTIONS`: Pulls data from the `facebook_reactions` table and aliases it as `REACTIONS`.
+  - `JOIN facebook_posts AS POSTS ON REACTIONS.post_id = POSTS.post_id`: Performs an inner join with the `facebook_posts` table (aliased as `POSTS`) based on the matching `post_id` between the two tables.
+- **Filtering**:
+  - `WHERE reaction = 'heart'`: Filters the results to include only those posts that have received a reaction labeled as 'heart'.
+- **Distinct Selection**:
+  - `SELECT DISTINCT`: Ensures that only unique post records are returned, removing any duplicates that may arise from multiple heart reactions on the same post.

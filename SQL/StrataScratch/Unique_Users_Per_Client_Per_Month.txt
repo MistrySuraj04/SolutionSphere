@@ -1,0 +1,37 @@
+# Question 2024: Unique Users Per Client Per Month
+
+**Platform:** StrataScratch
+
+**Difficulty:** Easy
+
+**Problem Statement**
+
+Write a query that returns the number of unique users per client per month
+
+### Table Structure
+
+Table: fact_events
+
+id:           int
+time_id:      datetime
+user_id:      varchar
+customer_id:  varchar
+client_id:    varchar
+event_type:   varchar
+event_id:     int
+
+### Solution Query
+
+SELECT client_id, MONTH(time_id) as 'month', COUNT(DISTINCT user_id) as users_num
+FROM fact_events
+GROUP BY client_id, MONTH(time_id);
+
+### Explanation
+
+- **Purpose**: Retrieves the number of unique users per client for each month.
+- **Selected Columns**:
+  - `client_id`: Identifies the client.
+  - `MONTH(time_id) AS 'month'`: Extracts the month from the `time_id` column and labels it as 'month'.
+  - `COUNT(DISTINCT user_id) AS users_num`: Counts the distinct `user_id`s, representing the number of unique users.
+- **Data Source**: The data is pulled from the `fact_events` table.
+- **Grouping**: Results are grouped by `client_id` and the extracted month from `time_id`.

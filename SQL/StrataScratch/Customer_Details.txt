@@ -1,0 +1,57 @@
+# Question 9891: {title}
+
+**Platform:** StrataScratch
+
+**Difficulty:** Easy
+
+**Problem Statement**
+
+Find the details of each customer regardless of whether the customer made an order. Output the customer's first name, last name, and the city along with the order details.
+Sort records based on the customer's first name and the order details in ascending order.
+
+### Table Structure
+
+Tables: customers, orders
+
+customers :
+
+id:              int
+first_name:      varchar
+last_name:       varchar
+city:            varchar
+address:         varchar
+phone_number:    varchar
+
+orders :
+
+id:                  int
+cust_id:            int
+order_date:         datetime
+order_details:      varchar
+total_order_cost:   int
+
+### Solution Query
+
+SELECT
+    c.first_name as first_name,
+    c.last_name as last_name,
+    c.city as city,
+    o.order_details as order_details
+FROM customers as c
+LEFT JOIN orders as o
+    on c.id = o.cust_id
+ORDER BY c.first_name, c.last_name, o.order_details;
+
+### Explanation
+
+- **Purpose**: Retrieves customer names, their city, and corresponding order details from the customers and orders tables.
+- **Selected Columns**:
+  - `c.first_name AS first_name`: Selects the customer's first name and labels it as `first_name`.
+  - `c.last_name AS last_name`: Selects the customer's last name and labels it as `last_name`.
+  - `c.city AS city`: Selects the customer's city and labels it as `city`.
+  - `o.order_details AS order_details`: Selects the order details and labels it as `order_details`.
+- **Data Source**:
+  - `FROM customers AS c`: Pulls data from the `customers` table and aliases it as `c`.
+  - `LEFT JOIN orders AS o ON c.id = o.cust_id`: Performs a left join with the `orders` table (aliased as `o`) based on the matching `id` from the `customers` table and `cust_id` from the `orders` table. This ensures that all customers are included, even if they have no associated orders.
+- **Ordering**:
+  - `ORDER BY c.first_name, c.last_name, o.order_details`: Sorts the results first by the customer's first name, then by last name, and finally by order details.

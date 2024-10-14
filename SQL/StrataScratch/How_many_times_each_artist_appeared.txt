@@ -1,0 +1,44 @@
+# Question 9992: Find how many times each artist appeared on the Spotify ranking list
+
+**Platform:** StrataScratch
+
+**Difficulty:** Easy
+
+**Problem Statement**
+
+Find how many times each artist appeared on the Spotify ranking list
+Output the artist name along with the corresponding number of occurrences.
+Order records by the number of occurrences in descending order.
+
+### Table Structure
+
+Table: spotify_worldwide_daily_song_ranking
+
+id:          int
+position:    int
+trackname:   varchar
+artist:      varchar
+streams:     int
+url:         varchar
+date:        datetime
+region:      varchar
+
+### Solution Query
+
+SELECT artist, COUNT(id) AS n_occurences
+FROM spotify_worldwide_daily_song_ranking
+GROUP BY artist
+ORDER BY 2 DESC;
+
+### Explanation
+
+- **Purpose**: Counts the number of occurrences of songs for each artist in the Spotify worldwide daily song ranking dataset.
+- **Selected Columns**:
+  - `artist`: Selects the name of the artist.
+  - `COUNT(id) AS n_occurences`: Counts the number of song entries (using `id`) for each artist and labels the count as `n_occurences`.
+- **Data Source**:
+  - `FROM spotify_worldwide_daily_song_ranking`: Pulls data from the `spotify_worldwide_daily_song_ranking` table.
+- **Grouping**:
+  - `GROUP BY artist`: Groups the results by `artist`, allowing the count of occurrences to be calculated for each artist.
+- **Ordering**:
+  - `ORDER BY 2 DESC`: Sorts the results in descending order based on the second selected column, which is the count of occurrences (`n_occurences`). This means that artists with the highest number of song occurrences will appear first.

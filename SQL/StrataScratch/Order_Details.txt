@@ -1,0 +1,58 @@
+# Question 9913: Order Details
+
+**Platform:** StrataScratch
+
+**Difficulty:** Easy
+
+**Problem Statement**
+
+Find order details made by Jill and Eva.
+Consider the Jill and Eva as first names of customers.
+Output the order date, details and cost along with the first name.
+Order records based on the customer id in ascending order.
+
+### Table Structure
+
+Tables: customers, orders
+
+customers :
+
+id:              int
+first_name:      varchar
+last_name:       varchar
+city:            varchar
+address:         varchar
+phone_number:    varchar
+
+orders :
+
+id:                  int
+cust_id:            int
+order_date:         datetime
+order_details:      varchar
+total_order_cost:   int
+
+### Solution Query
+
+SELECT c.first_name, o.order_date, o.order_details, o.total_order_cost
+FROM customers as c
+JOIN orders as o
+    ON c.id = o.cust_id
+WHERE first_name IN ('EVA', 'JILL')
+ORDER BY c.id ASC;
+
+### Explanation
+
+- **Purpose**: Retrieves order information for customers named 'EVA' and 'JILL', including their first names, order dates, order details, and total order costs.
+- **Selected Columns**:
+  - `c.first_name`: Selects the first name of the customer.
+  - `o.order_date`: Selects the date when the order was placed.
+  - `o.order_details`: Selects the details of the order.
+  - `o.total_order_cost`: Selects the total cost of the order.
+- **Data Source**:
+  - `FROM customers AS c`: Pulls data from the `customers` table and aliases it as `c`.
+  - `JOIN orders AS o ON c.id = o.cust_id`: Performs an inner join with the `orders` table (aliased as `o`) based on matching `id` from the `customers` table and `cust_id` from the `orders` table. This ensures that only customers with associated orders are included.
+- **Filtering**:
+  - `WHERE first_name IN ('EVA', 'JILL')`: Filters the results to include only those records where the customer's first name is either 'EVA' or 'JILL'.
+- **Ordering**:
+  - `ORDER BY c.id ASC`: Sorts the results in ascending order based on the customer ID (`c.id`).
