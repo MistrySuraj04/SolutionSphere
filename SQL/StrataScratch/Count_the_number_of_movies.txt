@@ -33,4 +33,5 @@ WHERE nominee = 'Abigail Breslin';
 - **Data Source**:
   - `FROM oscar_nominees`: Pulls data from the `oscar_nominees` table.
 - **Filtering**:
-  - `WHERE nominee = 'Abigail Breslin'`: Filters the results to include only records for the nominee named 'Abigail Breslin'. This means that only nominations associated with her name will be counted.
+  - `WHERE nominee = 'Abigail Breslin'`: Filters the results to include only records for the nominee named 'Abigail Breslin'.
+  This means that only nominations associated with her name will be counted.

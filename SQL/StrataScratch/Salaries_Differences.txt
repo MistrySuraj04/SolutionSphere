@@ -1,0 +1,58 @@
+# Question 10308: Salaries Differences
+
+**Platform:** StrataScratch
+
+**Difficulty:** Easy
+
+**Problem Statement**
+
+Write a query that calculates the difference between the highest salaries found in the marketing and engineering departments.
+Output just the absolute difference in salaries.
+
+### Table Structure
+
+Tables: db_employee, db_dept
+
+db_employee
+
+id:             INT
+first_name:     VARCHAR
+last_name:      VARCHAR
+salary:         INT
+department_id:  INT
+
+db_dept
+
+id:          INT
+department:  VARCHAR
+
+### Solution Query
+
+WITH data AS (
+    SELECT MAX(E.salary) as salary
+    FROM db_employee AS E
+    LEFT JOIN db_dept AS D ON E.department_id = D.id
+    WHERE D.department IN ('engineering', 'marketing')
+    GROUP BY D.department
+)
+
+SELECT ABS(MIN(salary) - MAX(salary)) AS salary_difference
+FROM data
+
+### Explanation
+
+- **Purpose**: Retrieves the employee details along with the maximum salary for each employee from the `ms_employee_salary` table, ordered by employee ID.
+- **Selected Columns**:
+  - `id`: Selects the unique identifier of the employee.
+  - `first_name`: Selects the first name of the employee.
+  - `last_name`: Selects the last name of the employee.
+  - `department_id`: Selects the department ID where the employee works.
+  - `MAX(salary)`: Retrieves the maximum salary for each employee.
+- **Data Source**:
+  - `FROM ms_employee_salary`: Pulls data from the `ms_employee_salary` table.
+- **Grouping**:
+  - `GROUP BY id, first_name, last_name, department_id`: Groups the results by the employee’s ID, first name, last name, and department ID, ensuring that the maximum salary is calculated per employee.
+- **Ordering**:
+  - `ORDER BY id ASC`: Sorts the results in ascending order based on the employee ID (`id`), so the employees are displayed in order of their IDs.
+
+**Note**: This query might work in databases like MySQL where all non-aggregated columns must be listed in the `GROUP BY` clause. However, in some other databases (like PostgreSQL or SQL Server), `MAX(salary)` might not work properly unless it’s within a subquery or window function.

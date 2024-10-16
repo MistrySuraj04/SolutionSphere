@@ -33,4 +33,4 @@ WHERE DEPARTMENT = 'ADMIN' AND MONTH(JOINING_DATE) >= '4';
 - **Data Source**: The data is pulled from the `worker` table.
 - **Filtering**:
   - `WHERE DEPARTMENT = 'ADMIN'`: Filters the results to include only workers in the 'ADMIN' department.
-  - `AND MONTH(JOINING_DATE) >= '4'`: Further filters the results to include only those whose `JOINING_DATE` falls in April (month 4) or later.
+  - `AND MONTH(JOINING_DATE) >  = '4'`: Further filters the results to include only those whose `JOINING_DATE` falls in April (month 4) or later.

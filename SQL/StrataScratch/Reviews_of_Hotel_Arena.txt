@@ -1,0 +1,54 @@
+# Question 10166: Reviews of Hotel Arena
+
+**Platform:** StrataScratch
+
+**Difficulty:** Easy
+
+**Problem Statement**
+
+Find the number of rows for each review score earned by 'Hotel Arena'.
+Output the hotel name (which should be 'Hotel Arena'),
+review score along with the corresponding number of rows with that score for the specified hotel.
+
+### Table Structure
+
+Table: hotel_reviews
+
+hotel_address:                             VARCHAR
+additional_number_of_scoring:              INT
+review_date:                               DATETIME
+average_score:                             FLOAT
+hotel_name:                                VARCHAR
+reviewer_nationality:                      VARCHAR
+negative_review:                           VARCHAR
+review_total_negative_word_counts:         INT
+total_number_of_reviews:                   INT
+positive_review:                           VARCHAR
+review_total_positive_word_counts:         INT
+total_number_of_reviews_reviewer_has_given:INT
+reviewer_score:                            FLOAT
+tags:                                      VARCHAR
+days_since_review:                         VARCHAR
+lat:                                       FLOAT
+lng:                                       FLOAT
+
+### Solution Query
+
+SELECT 'Hotel Arena' as hotel_name, reviewer_score, count(1)
+FROM hotel_reviews
+WHERE hotel_name = 'Hotel Arena'
+GROUP BY reviewer_score;
+
+### Explanation
+
+- **Purpose**: Retrieves the number of reviews for 'Hotel Arena' grouped by reviewer scores, while labeling the hotel in the results.
+- **Selected Columns**:
+  - `'Hotel Arena' AS hotel_name`: Assigns the string 'Hotel Arena' as a constant value and labels it as `hotel_name`.
+  - `reviewer_score`: Selects the review scores given by reviewers.
+  - `COUNT(1)`: Counts the number of reviews for each reviewer score.
+- **Data Source**:
+  - `FROM hotel_reviews`: Pulls data from the `hotel_reviews` table.
+- **Filtering**:
+  - `WHERE hotel_name = 'Hotel Arena'`: Filters the results to include only reviews for the hotel named 'Hotel Arena'.
+- **Grouping**:
+  - `GROUP BY reviewer_score`: Groups the results by `reviewer_score` to calculate the number of reviews for each score value.
