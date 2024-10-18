@@ -1,0 +1,84 @@
+# Question 10077: Income By Title and Gender
+
+**Platform:** StrataScratch
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Find the average total compensation based on employee titles and gender.
+Total compensation is calculated by adding both the salary and bonus of each employee.
+However, not every employee receives a bonus so disregard employees without bonuses in your calculation.
+Employee can receive more than one bonus.
+Output the employee title, gender (i.e., sex), along with the average total compensation.
+
+### Table Structure
+
+Tables: sf_employee, sf_bonus
+
+sf_employee :
+
+id:               INT
+first_name:      VARCHAR
+last_name:       VARCHAR
+age:             INT
+sex:             VARCHAR
+employee_title:  VARCHAR
+department:      VARCHAR
+salary:          INT
+target:          INT
+email:           VARCHAR
+city:            VARCHAR
+address:         VARCHAR
+manager_id:      INT
+
+sf_bonus :
+
+worker_ref_id:   INT
+bonus:           INT
+
+### Solution Query
+
+WITH bonus_data AS (
+    SELECT worker_ref_id, SUM(bonus) AS bonus
+    FROM sf_bonus
+    GROUP BY worker_ref_id
+)
+
+SELECT e.employee_title, e.sex, AVG(e.salary + b.bonus)
+FROM sf_employee AS e
+LEFT JOIN bonus_data AS b ON e.id = b.worker_ref_id
+WHERE b.bonus <> 0
+GROUP BY e.employee_title, e.sex;
+
+### Explanation
+
+- **Purpose**: Computes the average salary plus bonus for employees, grouped by their job title and gender, while excluding employees with a zero bonus.
+
+- **Common Table Expression (CTE)**:
+  - **CTE Name**: `bonus_data`
+  - **Selected Columns**:
+    - `worker_ref_id`: Selects the worker reference ID from the `sf_bonus` table.
+    - `SUM(bonus) AS bonus`: Sums the `bonus` for each worker and labels this total as `bonus`.
+  - **Data Source**:
+    - `FROM sf_bonus`: Pulls data from the `sf_bonus` table.
+  - **Grouping**:
+    - `GROUP BY worker_ref_id`: Groups the results by `worker_ref_id`, allowing for the calculation of total bonuses per worker.
+
+- **Main Query**:
+  - **Selected Columns**:
+    - `e.employee_title`: Selects the job title of the employee from the `sf_employee` table.
+    - `e.sex`: Selects the sex of the employee.
+    - `AVG(e.salary + b.bonus)`: Calculates the average of the combined salary and bonus for each group.
+
+- **Data Sources**:
+  - `FROM sf_employee AS e`: Pulls data from the `sf_employee` table, aliasing it as `e`.
+  - `LEFT JOIN bonus_data AS b ON e.id = b.worker_ref_id`: Performs a left join with the `bonus_data` CTE based on matching IDs to incorporate bonus information for each employee.
+
+- **Filtering**:
+  - `WHERE b.bonus <> 0`: Filters the results to exclude records where the bonus is zero, ensuring only employees with a non-zero bonus are considered.
+
+- **Grouping**:
+  - `GROUP BY e.employee_title, e.sex`: Groups the results by both `employee_title` and `sex`, allowing separate averages to be calculated for each combination of title and gender.
+
+This query provides insights into the average compensation (salary plus bonus) for employees based on their title and gender, focusing on those who receive bonuses.

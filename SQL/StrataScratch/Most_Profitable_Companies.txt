@@ -1,0 +1,48 @@
+# Question 10354: Most Profitable Companies
+
+**Platform:** StrataScratch
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+
+Find the 3 most profitable companies in the entire world.
+Output the result along with the corresponding company name.
+Sort the result based on profits in descending order.
+
+### Table Structure
+
+Table: forbes_global_2010_2014
+
+company:         VARCHAR
+sector:          VARCHAR
+industry:        VARCHAR
+continent:       VARCHAR
+country:         VARCHAR
+marketvalue:     FLOAT
+sales:           FLOAT
+profits:         FLOAT
+assets:          FLOAT
+rank:            INT
+forbeswebpage:   VARCHAR
+
+### Solution Query
+
+SELECT COMPANY, PROFITS AS PROFIT
+FROM forbes_global_2010_2014
+ORDER BY PROFITS DESC
+LIMIT 3;
+
+### Explanation
+
+- **Purpose**: Retrieves the top 3 companies with the highest profits from the Forbes Global dataset for the years 2010 to 2014.
+- **Selected Columns**:
+  - `COMPANY`: Selects the name of the company.
+  - `PROFITS AS PROFIT`: Selects the profits and renames the column as `PROFIT` for clarity.
+- **Data Source**:
+  - `FROM forbes_global_2010_2014`: Pulls data from the `forbes_global_2010_2014` table.
+- **Ordering**:
+  - `ORDER BY PROFITS DESC`: Sorts the results in descending order based on the `PROFITS` column, showing the companies with the highest profits at the top.
+- **Limiting Results**:
+  - `LIMIT 3`: Restricts the output to the top 3 companies with the highest profits.

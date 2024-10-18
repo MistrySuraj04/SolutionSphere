@@ -1,0 +1,82 @@
+# Question 10064: Highest Energy Consumption
+
+**Platform:** StrataScratch
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Find the date with the highest total energy consumption from the Meta/Facebook data centers.
+Output the date along with the total energy consumption across all data centers.
+
+### Table Structure
+
+Tables: fb_eu_energy, fb_asia_energy, fb_na_energy
+
+fb_eu_energy :
+
+date:          DATETIME
+consumption:   INT
+
+fb_asia_energy :
+
+date:          DATETIME
+consumption:   INT
+
+fb_na_energy :
+
+date:          DATETIME
+consumption:   INT
+
+### Solution Query
+
+SELECT date, consumption
+FROM (
+    SELECT A.date AS date, SUM(A.consumption) AS consumption,
+    DENSE_RANK() OVER(ORDER BY SUM(A.consumption) DESC) AS ranks
+    FROM (
+        SELECT *
+        FROM fb_eu_energy
+
+        UNION ALL
+
+        SELECT *
+        FROM fb_asia_energy
+
+        UNION ALL
+
+        SELECT *
+        FROM fb_na_energy
+    ) AS A
+    GROUP BY A.date
+) AS B
+WHERE ranks = 1;
+
+### Explanation
+
+- **Purpose**: Retrieves the date and total energy consumption for the day with the highest total energy consumption across multiple regions.
+
+- **Inner Query (Subquery A)**:
+  - **Selected Columns**:
+    - `A.date AS date`: Selects the date from the combined energy consumption datasets.
+    - `SUM(A.consumption) AS consumption`: Calculates the total consumption for each date.
+    - `DENSE_RANK() OVER(ORDER BY SUM(A.consumption) DESC) AS ranks`: Assigns a dense rank to each date based on total consumption in descending order.
+
+  - **Data Sources**:
+    - The query combines three tables using `UNION ALL`:
+      - `SELECT * FROM fb_eu_energy`: Selects all records from the European energy consumption table.
+      - `SELECT * FROM fb_asia_energy`: Selects all records from the Asian energy consumption table.
+      - `SELECT * FROM fb_na_energy`: Selects all records from the North American energy consumption table.
+
+  - **Grouping**:
+    - `GROUP BY A.date`: Groups the combined results by date to calculate total consumption for each day.
+
+- **Outer Query (Subquery B)**:
+  - **Selected Columns**:
+    - `date`: Selects the date from the results of the inner query.
+    - `consumption`: Selects the total energy consumption for that date.
+
+- **Filtering**:
+  - `WHERE ranks = 1`: Filters the results to include only the date(s) with the highest total consumption, as determined by the dense rank.
+
+This query effectively identifies the date with the highest energy consumption across Europe, Asia, and North America, providing insights into energy usage patterns.

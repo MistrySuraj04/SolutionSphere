@@ -1,0 +1,78 @@
+# Question 10353: Workers With The Highest Salaries
+
+**Platform:** StrataScratch
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+You have been asked to find the job titles of the highest-paid employees.
+Your output should include the highest-paid title or multiple titles with the same salary.
+
+### Table Structure
+
+Tables: worker, title
+
+worker :
+
+worker_id:      INT
+first_name:     VARCHAR
+last_name:      VARCHAR
+salary:         INT
+joining_date:   DATETIME
+department:     VARCHAR
+
+title :
+
+worker_ref_id:   INT
+worker_title:    VARCHAR
+affected_from:   DATETIME
+
+### Solution Query
+
+WITH highest_salary AS (
+    SELECT salary
+    FROM worker
+    GROUP BY salary
+    ORDER BY salary DESC
+    LIMIT 1
+)
+
+SELECT T.worker_title AS best_paid_title
+FROM worker AS W
+JOIN title AS T ON T.worker_ref_id = W.worker_id
+JOIN highest_salary AS H ON W.salary = H.salary;
+
+### Explanation
+
+- **Purpose**: Retrieves the job title of the worker with the highest salary from the `worker` table.
+- **CTE (Common Table Expression)**:
+  - `highest_salary`: This part of the query creates a temporary result set containing the highest salary:
+    - `SELECT salary`: Selects the salary from the `worker` table.
+    - `GROUP BY salary`: Groups the results by salary to avoid duplicates.
+    - `ORDER BY salary DESC`: Orders the salaries in descending order, with the highest salary at the top.
+    - `LIMIT 1`: Restricts the result to just the highest salary.
+
+- **Main Query**:
+  - **Selected Column**:
+    - `T.worker_title AS best_paid_title`: Selects the job title of the worker who has the highest salary and renames the result as `best_paid_title`.
+  - **Data Source**:
+    - `FROM worker AS W`: Pulls data from the `worker` table and aliases it as `W`.
+    - `JOIN title AS T ON T.worker_ref_id = W.worker_id`: Joins the `title` table (aliased as `T`) with the `worker` table on `worker_id` to fetch the job title corresponding to the worker.
+    - `JOIN highest_salary AS H ON W.salary = H.salary`: Joins the `worker` table with the `highest_salary` CTE to get the job title of the worker with the highest salary.
+
+This query identifies the worker's title with the highest salary by joining relevant tables and using a CTE to extract the maximum salary.
+# Question 001: {title}
+
+**Platform:** StrataScratch
+
+**Difficulty:** Medium
+
+**Problem Statement**
+{Question}
+
+### Table Structure
+
+### Solution Query
+
+### Explanation

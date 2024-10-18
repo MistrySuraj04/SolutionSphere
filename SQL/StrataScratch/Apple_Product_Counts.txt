@@ -1,0 +1,71 @@
+# Question 10141: Apple Product Counts
+
+**Platform:** StrataScratch
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Find the number of Apple product users and the number of total users with a device and group the counts by language.
+Assume Apple products are only MacBook-Pro, iPhone 5s, and iPad-air.
+Output the language along with the total number of Apple users and users with any device.
+Order your results based on the number of total users in descending order.
+
+### Table Structure
+
+Tables: playbook_events, playbook_users
+
+playbook_events :
+
+user_id:       INT
+occurred_at:   DATETIME
+event_type:    VARCHAR
+event_name:    VARCHAR
+location:      VARCHAR
+device:        VARCHAR
+
+playbook_users :
+
+user_id:       INT
+created_at:    DATETIME
+company_id:    INT
+language:      VARCHAR
+activated_at:  DATETIME
+state:         VARCHAR
+
+### Solution Query
+
+SELECT language, COUNT(DISTINCT
+    CASE
+        WHEN e.device IN ('macbook pro','iphone 5s','ipad air')
+        THEN e.user_id
+    END
+) AS n_apple_user,
+COUNT(DISTINCT e.user_id) AS n_total_users
+FROM playbook_events e
+JOIN playbook_users u USING(user_id)
+GROUP BY u.language
+ORDER BY n_total_users DESC;
+
+### Explanation
+
+- **Purpose**: Retrieves the number of distinct Apple device users and the total number of users grouped by language from the playbook events data.
+
+- **Selected Columns**:
+  - `language`: Selects the language associated with users from the `playbook_users` table.
+  - `COUNT(DISTINCT CASE WHEN e.device IN ('macbook pro', 'iphone 5s', 'ipad air') THEN e.user_id END) AS n_apple_user`:
+    - Counts the distinct `user_id`s of users whose devices are either 'macbook pro', 'iphone 5s', or 'ipad air'. This count is labeled as `n_apple_user`.
+  - `COUNT(DISTINCT e.user_id) AS n_total_users`:
+    - Counts the distinct `user_id`s across all devices, labeling this as `n_total_users`.
+
+- **Data Sources**:
+  - `FROM playbook_events e`: Pulls data from the `playbook_events` table, aliasing it as `e`.
+  - `JOIN playbook_users u USING(user_id)`: Joins the `playbook_users` table (aliased as `u`) with the `playbook_events` table based on `user_id` to correlate user information with events.
+
+- **Grouping**:
+  - `GROUP BY u.language`: Groups the results by the `language` column from the `playbook_users` table, allowing separate counts for each language.
+
+- **Ordering**:
+  - `ORDER BY n_total_users DESC`: Sorts the results in descending order based on the total number of users (`n_total_users`), ensuring that languages with the highest user counts appear first.
+
+This query provides insights into the usage of Apple devices among users across different languages in the dataset.

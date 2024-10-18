@@ -1,0 +1,45 @@
+# Question 10322: Finding User Purchases
+
+**Platform:** StrataScratch
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Write a query that'll identify returning active users.
+A returning active user is a user that has made a second purchase within 7 days of any other of their purchases.
+Output a list of user_ids of these returning active users.
+
+### Table Structure
+
+Table: amazon_transactions
+
+id:          INT
+user_id:     INT
+item:        VARCHAR
+created_at:  DATETIME
+revenue:     INT
+
+### Solution Query
+
+select distinct a.user_id
+from amazon_transactions as a
+join amazon_transactions as b on a.user_id = b.user_id
+where a.id <> b.id AND datediff(a.created_at, b.created_at) BETWEEN 0 AND 7
+order by a.user_id;
+
+### Explanation
+
+- **Purpose**: Retrieves distinct user IDs from the Amazon transactions that have made multiple transactions within a 7-day period.
+- **Selected Column**:
+  - `SELECT DISTINCT a.user_id`: Selects unique `user_id`s from the `amazon_transactions` table (aliased as `a`).
+- **Data Source**:
+  - `FROM amazon_transactions AS a`: Pulls data from the `amazon_transactions` table and aliases it as `a`.
+  - `JOIN amazon_transactions AS b ON a.user_id = b.user_id`: Performs an inner join on the same `amazon_transactions` table (aliased as `b`) to find users with multiple transactions.
+- **Filtering**:
+  - `WHERE a.id <> b.id`: Ensures that the records being compared are not the same transaction by checking that their IDs are different.
+  - `AND DATEDIFF(a.created_at, b.created_at) BETWEEN 0 AND 7`: Filters the results to include only those pairs of transactions where the difference in the `created_at` timestamps is between 0 and 7 days. This means the transactions must occur within the same week.
+- **Ordering**:
+  - `ORDER BY a.user_id`: Sorts the results in ascending order based on the `user_id`.
+
+This query effectively identifies users who have made at least two transactions within a week.

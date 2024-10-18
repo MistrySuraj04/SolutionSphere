@@ -1,0 +1,58 @@
+# Question 10159: Ranking Most Active Guests
+
+**Platform:** StrataScratch
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+--Rank guests based on the total number of messages they've exchanged with any of the hosts.
+Guests with the same number of messages as other guests should have the same rank.
+Do not skip rankings if the preceding rankings are identical.
+Output the rank, guest id, and number of total messages they've sent. Order by the highest number of total messages first.
+
+### Table Structure
+
+Table: airbnb_contacts
+
+id_guest:        VARCHAR
+id_host:         VARCHAR
+id_listing:      VARCHAR
+ts_contact_at:   DATETIME
+ts_reply_at:     DATETIME
+ts_accepted_at:  DATETIME
+ts_booking_at:   DATETIME
+ds_checkin:      DATETIME
+ds_checkout:     DATETIME
+n_guests:       INT
+n_messages:      INT
+
+### Solution Query
+
+SELECT A.id_guest, DENSE_RANK() OVER (ORDER BY messages DESC) AS ranks, messages
+FROM (
+    SELECT id_guest, SUM(n_messages) AS messages
+    FROM airbnb_contacts
+    GROUP BY id_guest
+) AS A
+
+### Explanation
+
+- **Purpose**: Retrieves the guest IDs along with their total message counts and assigns ranks based on the number of messages sent.
+
+- **Inner Query (Subquery)**:
+  - **Selected Columns**:
+    - `id_guest`: Selects the ID of the guest.
+    - `SUM(n_messages) AS messages`: Sums up the number of messages (`n_messages`) sent by each guest and labels this sum as `messages`.
+  - **Data Source**:
+    - `FROM airbnb_contacts`: Pulls data from the `airbnb_contacts` table.
+  - **Grouping**:
+    - `GROUP BY id_guest`: Groups the results by `id_guest`, allowing the calculation of total messages for each guest.
+
+- **Outer Query**:
+  - **Selected Columns**:
+    - `A.id_guest`: Selects the guest ID from the inner query results.
+    - `DENSE_RANK() OVER (ORDER BY messages DESC) AS ranks`: Assigns a dense rank to each guest based on the total number of messages in descending order. Guests with the same message count receive the same rank, and the next rank is the subsequent integer (e.g., if two guests are ranked 1, the next rank will be 2).
+    - `messages`: Selects the total number of messages for each guest.
+
+- **Final Output**: The result of this query will be a list of guest IDs along with their total message counts and their corresponding ranks based on message activity.

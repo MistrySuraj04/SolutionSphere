@@ -1,0 +1,65 @@
+# Question 10156: Number Of Units Per Nationality
+
+**Platform:** StrataScratch
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Find the number of apartments per nationality that are owned by people under 30 years old.
+Output the nationality along with the number of apartments.
+Sort records by the apartments count in descending order.
+
+### Table Structure
+
+Tables: airbnb_hosts, airbnb_units
+
+airbnb_hosts :
+
+host_id:      INT
+nationality:  VARCHAR
+gender:       VARCHAR
+age:          INT
+
+airbnb_units :
+
+host_id:       INT
+unit_id:       VARCHAR
+unit_type:     VARCHAR
+n_beds:        INT
+n_bedrooms:    INT
+country:       VARCHAR
+city:          VARCHAR
+
+### Solution Query
+
+SELECT H.nationality AS nationality, COUNT(DISTINCT U.unit_id) AS apartment_count
+FROM airbnb_hosts AS H
+JOIN airbnb_units AS U ON H.host_id = U.host_id
+WHERE H.AGE < 30 AND U.unit_type = 'Apartment'
+GROUP BY H.nationality
+ORDER BY COUNT(DISTINCT U.unit_id) DESC;
+
+### Explanation
+
+- **Purpose**: Retrieves the count of distinct apartments hosted by Airbnb hosts under the age of 30, grouped by their nationality.
+
+- **Selected Columns**:
+  - `H.nationality AS nationality`: Selects the nationality of the hosts from the `airbnb_hosts` table and renames it as `nationality`.
+  - `COUNT(DISTINCT U.unit_id) AS apartment_count`: Counts the distinct `unit_id`s from the `airbnb_units` table to determine how many unique apartments each host nationality has and renames this count as `apartment_count`.
+
+- **Data Sources**:
+  - `FROM airbnb_hosts AS H`: Pulls data from the `airbnb_hosts` table and aliases it as `H`.
+  - `JOIN airbnb_units AS U ON H.host_id = U.host_id`: Joins the `airbnb_units` table (aliased as `U`) with the `airbnb_hosts` table based on matching `host_id`s to link hosts with their respective units.
+
+- **Filtering**:
+  - `WHERE H.AGE < 30`: Filters the results to include only those hosts who are younger than 30 years old.
+  - `AND U.unit_type = 'Apartment'`: Further filters the results to include only those units that are classified as 'Apartment'.
+
+- **Grouping**:
+  - `GROUP BY H.nationality`: Groups the results by the nationality of the hosts, allowing the count of distinct apartments to be calculated for each nationality.
+
+- **Ordering**:
+  - `ORDER BY COUNT(DISTINCT U.unit_id) DESC`: Sorts the results in descending order based on the count of distinct apartments, meaning the nationalities with the highest number of apartments will appear first.
+
+This query effectively provides insights into the distribution of apartment listings among younger Airbnb hosts by nationality.
