@@ -1,0 +1,35 @@
+# Question 19: Employee Names
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Write a query that prints a list of employee names (i.e.: the name attribute) from the Employee table in alphabetical order.
+
+### Solution
+
+SELECT NAME
+FROM EMPLOYEE
+ORDER BY NAME;
+
+### Explanation
+
+### **Purpose**:
+The query retrieves the names of all employees from the `EMPLOYEE` table and sorts them in alphabetical order.
+
+### **Query Breakdown**:
+1. **Selected Column**:
+   - `NAME`: Selects the name of the employee.
+
+2. **Data Source**:
+   - `FROM EMPLOYEE`: Specifies the `EMPLOYEE` table as the source of the data.
+
+3. **Sorting**:
+   - `ORDER BY NAME`: Orders the employee names in ascending alphabetical order (default sort order).
+
+### **Result**:
+The result will be a list of employee names sorted in alphabetical order.
+
+

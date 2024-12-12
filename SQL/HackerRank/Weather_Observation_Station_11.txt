@@ -1,0 +1,47 @@
+# Question 16: Weather Observation Station 11
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Query the list of CITY names from STATION that either do not start with vowels or do not end with vowels.
+Your result cannot contain duplicates.
+
+### Solution
+
+SELECT DISTINCT CITY
+FROM STATION
+WHERE LEFT(CITY, 1) NOT IN ('a', 'e', 'i', 'o', 'u')
+OR RIGHT(CITY, 1) NOT IN ('a', 'e', 'i', 'o', 'u');
+
+### Explanation
+
+### **Purpose**:
+The query retrieves a distinct list of city names from the `STATION` table where **either** the first letter or the last letter (or both) of the city name is **not** a vowel (A, E, I, O, or U).
+
+### **Query Breakdown**:
+1. **Selected Column**:
+   - `DISTINCT CITY`: Selects unique city names from the `STATION` table, ensuring no duplicates in the result.
+
+2. **Data Source**:
+   - `FROM STATION`: Specifies the `STATION` table as the source for the data.
+
+3. **Filtering Condition**:
+   - `WHERE LEFT(CITY, 1) NOT IN ('a', 'e', 'i', 'o', 'u')`:
+     - `LEFT(CITY, 1)`: Extracts the first character of the city name.
+     - `NOT IN ('a', 'e', 'i', 'o', 'u')`: Filters out cities where the first letter is a vowel ('a', 'e', 'i', 'o', or 'u').
+   - `OR RIGHT(CITY, 1) NOT IN ('a', 'e', 'i', 'o', 'u')`:
+     - `RIGHT(CITY, 1)`: Extracts the last character of the city name.
+     - `NOT IN ('a', 'e', 'i', 'o', 'u')`: Filters out cities where the last letter is a vowel ('a', 'e', 'i', 'o', or 'u').
+   - The `OR` condition means that the query will return cities where **either** the first or the last character is not a vowel.
+
+> **Note**: If city names in the `STATION` table are stored in uppercase letters, this query might not work as expected. To ensure the query is case-insensitive, you can use the `LOWER()` function to convert the first and last characters to lowercase:
+   - `LOWER(LEFT(CITY, 1)) NOT IN ('a', 'e', 'i', 'o', 'u')`
+   - `LOWER(RIGHT(CITY, 1)) NOT IN ('a', 'e', 'i', 'o', 'u')`
+
+### **Result**:
+The result will be a list of distinct city names where **either** the first or the last letter (or both) of the city name is **not** a vowel (A, E, I, O, or U).
+
+

@@ -1,0 +1,39 @@
+# Question 11: Weather Observation Station 6
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Query the list of CITY names starting with vowels (i.e., a, e, i, o, or u) from STATION.
+ Your result cannot contain duplicates.
+
+### Solution
+
+SELECT CITY
+FROM STATION
+WHERE LEFT(CITY, 1) IN ('a', 'e', 'i', 'o', 'u');
+
+### Explanation
+
+- **Purpose**: Retrieves the names of cities from the `STATION` table that start with a vowel (A, E, I, O, or U).
+
+### **Query Breakdown**
+- **Selected Column**:
+  - `CITY`: Selects the name of the city from the `STATION` table.
+
+- **Data Source**:
+  - `FROM STATION`: Pulls data from the `STATION` table.
+
+- **Filtering**:
+  - `WHERE LEFT(CITY, 1) IN ('a', 'e', 'i', 'o', 'u')`:
+    - `LEFT(CITY, 1)`: Extracts the first character from the `CITY` name.
+    - `IN ('a', 'e', 'i', 'o', 'u')`: Checks if the first character of the city name is one of the lowercase vowels — 'a', 'e', 'i', 'o', or 'u'.
+
+> **Note**: If the city names in the table have uppercase letters, this query might not work as intended. To make it case-insensitive, you could use `LOWER(LEFT(CITY, 1)) IN ('a', 'e', 'i', 'o', 'u')`.
+
+### **Result**:
+- The output will be a list of city names from the `STATION` table where the first letter of the city's name is a vowel (A, E, I, O, or U).
+
+

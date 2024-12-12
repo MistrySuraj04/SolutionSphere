@@ -1,0 +1,25 @@
+# Question 7: Weather Observation Station 1
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Query a list of CITY and STATE from the STATION table.
+
+### Solution
+
+SELECT CITY, STATE
+FROM STATION;
+
+### Explanation
+
+- **Purpose**: Retrieves the city and state information for all records from the `STATION` table.
+- **Selected Columns**:
+  - `CITY`: Selects the name of the city from the `STATION` table.
+  - `STATE`: Selects the name of the state associated with the city from the `STATION` table.
+- **Data Source**:
+  - `FROM STATION`: Pulls data from the `STATION` table.
+- **No Filtering**:
+  - Since there is no `WHERE` clause, all records from the `STATION` table are included in the result.

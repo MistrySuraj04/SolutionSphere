@@ -1,0 +1,29 @@
+# Question 8: Weather Observation Station 3
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Query a list of CITY names from STATION for cities that have an even ID number.
+Print the results in any order, but exclude duplicates from the answer.
+
+### Solution
+
+SELECT DISTINCT CITY
+FROM STATION
+WHERE ID % 2 = 0;
+
+### Explanation
+
+- **Purpose**: Retrieves a distinct list of city names from the `STATION` table where the `ID` is an even number.
+- **Selected Column**:
+  - `DISTINCT CITY`: Selects only unique city names from the `STATION` table, ensuring that no duplicate city names appear in the result.
+- **Data Source**:
+  - `FROM STATION`: Pulls data from the `STATION` table.
+- **Filtering**:
+  - `WHERE ID % 2 = 0`: Filters the results to include only records where the `ID` is an even number.
+  The modulus operator `%` returns the remainder of the division, so `ID % 2 = 0` ensures only even `ID` values are included.
+
+

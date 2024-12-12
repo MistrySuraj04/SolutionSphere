@@ -1,0 +1,40 @@
+# Question 15: Weather Observation Station 10
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Query the list of CITY names from STATION that do not end with vowels. Your result cannot contain duplicates.
+
+### Solution
+
+SELECT DISTINCT CITY
+FROM STATION
+WHERE RIGHT(CITY, 1) NOT IN ('a', 'e', 'i', 'o', 'u');
+
+### Explanation
+
+### **Purpose**:
+The query retrieves a distinct list of city names from the `STATION` table where the last letter of the city name is **not** a vowel (A, E, I, O, or U).
+
+### **Query Breakdown**:
+1. **Selected Column**:
+   - `DISTINCT CITY`: Selects unique city names from the `STATION` table, ensuring no duplicates in the result.
+
+2. **Data Source**:
+   - `FROM STATION`: Specifies the `STATION` table as the source for the data.
+
+3. **Filtering Condition**:
+   - `WHERE RIGHT(CITY, 1) NOT IN ('a', 'e', 'i', 'o', 'u')`:
+     - `RIGHT(CITY, 1)`: Extracts the last character of the city name.
+     - `NOT IN ('a', 'e', 'i', 'o', 'u')`: Filters out cities where the last letter is one of the vowels ('a', 'e', 'i', 'o', or 'u'). Only cities whose last letter is not a vowel will be included in the result.
+
+> **Note**: If city names in the `STATION` table are stored with uppercase letters, this query might not work as expected. To ensure case-insensitivity, you can use the `LOWER()` function to convert the last letter to lowercase:
+   - `LOWER(RIGHT(CITY, 1)) NOT IN ('a', 'e', 'i', 'o', 'u')`
+
+### **Result**:
+The result will be a list of distinct city names where the last letter of the city's name is **not** a vowel (A, E, I, O, or U).
+
+

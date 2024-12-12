@@ -1,0 +1,35 @@
+# Question 23: Revising Aggregations - The Sum Function
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Query the total population of all cities in CITY where District is California.
+
+### Solution
+
+SELECT SUM(POPULATION)
+FROM CITY
+WHERE UPPER(DISTRICT) = 'CALIFORNIA'
+
+### Explanation
+
+### **Purpose**:
+The query calculates the total population of cities in the `CITY` table that are located in the district of California.
+
+### **Query Breakdown**:
+1. **Selected Column**:
+   - `SUM(POPULATION)`: Calculates the sum of the `POPULATION` column for the rows that meet the filtering condition. This gives the total population of cities in the specified district.
+
+2. **Data Source**:
+   - `FROM CITY`: Specifies the `CITY` table as the source of the data.
+
+3. **Filtering Condition**:
+   - `WHERE UPPER(DISTRICT) = 'CALIFORNIA'`: Filters the rows where the `DISTRICT` column (converted to uppercase using `UPPER()`) is equal to `'CALIFORNIA'`. This ensures the query works in a case-insensitive manner.
+
+### **Result**:
+The result will be a single value representing the total population of cities located in the district of California in the `CITY` table.
+
+

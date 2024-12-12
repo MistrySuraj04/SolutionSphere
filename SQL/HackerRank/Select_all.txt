@@ -1,0 +1,26 @@
+# Question 3: Select All
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Query all columns (attributes) for every row in the CITY table.
+
+### Solution
+
+SELECT *
+FROM CITY;
+
+### Explanation
+
+- **Purpose**: Retrieves all columns and all records from the `CITY` table.
+- **Selected Columns**:
+  - `*`: Selects all columns available in the `CITY` table without any specific filtering or restrictions.
+- **Data Source**:
+  - `FROM CITY`: Specifies the `CITY` table as the source of data.
+- **No Filtering**:
+  - Since there is no `WHERE` clause, all records from the table are included in the result.
+
+

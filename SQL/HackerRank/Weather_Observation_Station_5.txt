@@ -1,0 +1,69 @@
+# Question 10: Weather Observation Station 5
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Query the two cities in STATION with the shortest and longest CITY names,
+as well as their respective lengths (i.e.: number of characters in the name).
+If there is more than one smallest or largest city,
+choose the one that comes first when ordered alphabetically.
+
+### Solution
+
+( SELECT CITY, LENGTH(CITY)
+FROM STATION
+GROUP BY CITY
+ORDER BY LENGTH(CITY) ASC, CITY ASC
+LIMIT 1 )
+
+UNION ALL
+
+( SELECT CITY, LENGTH(CITY)
+FROM STATION
+GROUP BY CITY
+ORDER BY LENGTH(CITY) DESC, CITY DESC
+LIMIT 1 )
+
+### Explanation
+
+- **Purpose**: Retrieves the city with the shortest name and the city with the longest name from the `STATION` table.
+
+### **Query Breakdown**
+1. **Subquery 1**:
+   - **Objective**: Finds the city with the shortest name in terms of character length.
+   - **Selected Columns**:
+     - `CITY`: The name of the city.
+     - `LENGTH(CITY)`: The length of the city's name in characters.
+   - **Data Source**:
+     - `FROM STATION`: Pulls data from the `STATION` table.
+   - **Grouping**:
+     - `GROUP BY CITY`: Ensures unique city names are processed to avoid duplicates.
+   - **Sorting**:
+     - `ORDER BY LENGTH(CITY) ASC, CITY ASC`: Sorts the city names by their length in ascending order, and for cities with the same length, sorts them alphabetically in ascending order.
+   - **Limiting**:
+     - `LIMIT 1`: Retrieves only the first city with the shortest name from the sorted list.
+
+2. **UNION ALL**: Combines the results of **Subquery 1** and **Subquery 2** into a single result set, without eliminating duplicates.
+
+3. **Subquery 2**:
+   - **Objective**: Finds the city with the longest name in terms of character length.
+   - **Selected Columns**:
+     - `CITY`: The name of the city.
+     - `LENGTH(CITY)`: The length of the city's name in characters.
+   - **Data Source**:
+     - `FROM STATION`: Pulls data from the `STATION` table.
+   - **Grouping**:
+     - `GROUP BY CITY`: Ensures unique city names are processed to avoid duplicates.
+   - **Sorting**:
+     - `ORDER BY LENGTH(CITY) DESC, CITY DESC`: Sorts the city names by their length in descending order, and for cities with the same length, sorts them alphabetically in descending order.
+   - **Limiting**:
+     - `LIMIT 1`: Retrieves only the first city with the longest name from the sorted list.
+
+### **Result**:
+- The output will have **two rows**:
+  1. The city with the shortest name and its length.
+  2. The city with the longest name and its length.
+

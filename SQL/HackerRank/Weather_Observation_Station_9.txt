@@ -1,0 +1,40 @@
+# Question 14: Weather Observation Station 9
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Query the list of CITY names from STATION that do not start with vowels. Your result cannot contain duplicates.
+
+### Solution
+
+SELECT DISTINCT CITY
+FROM STATION
+WHERE LEFT(CITY, 1) NOT IN ('a', 'e', 'i', 'o', 'u');
+
+### Explanation
+
+### **Purpose**:
+The query retrieves a distinct list of city names from the `STATION` table where the first letter of the city name is **not** a vowel (A, E, I, O, or U).
+
+### **Query Breakdown**:
+1. **Selected Column**:
+   - `DISTINCT CITY`: Selects unique city names from the `STATION` table, ensuring no duplicates in the result.
+
+2. **Data Source**:
+   - `FROM STATION`: Specifies the `STATION` table as the source for the data.
+
+3. **Filtering Condition**:
+   - `WHERE LEFT(CITY, 1) NOT IN ('a', 'e', 'i', 'o', 'u')`:
+     - `LEFT(CITY, 1)`: Extracts the first character of the city name.
+     - `NOT IN ('a', 'e', 'i', 'o', 'u')`: Filters out cities where the first letter is one of the vowels ('a', 'e', 'i', 'o', or 'u'). Only cities whose first letter is not a vowel will be included in the result.
+
+> **Note**: If the city names in the `STATION` table contain uppercase letters, this query might not work as intended. To make the query case-insensitive, you can apply the `LOWER()` function to the `LEFT()` function like this:
+   - `LOWER(LEFT(CITY, 1)) NOT IN ('a', 'e', 'i', 'o', 'u')`
+
+### **Result**:
+The result will be a list of distinct cities where the first letter of the city name is **not** a vowel (A, E, I, O, or U).
+
+

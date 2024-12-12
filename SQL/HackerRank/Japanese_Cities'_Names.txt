@@ -1,0 +1,28 @@
+# Question 6: Japanese Cities' Names
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Query the names of all the Japanese cities in the CITY table. The COUNTRYCODE for Japan is JPN.
+
+### Solution
+
+SELECT NAME
+FROM CITY
+WHERE UPPER(COUNTRYCODE) = 'JPN';
+
+### Explanation
+
+- **Purpose**: Retrieves the names of all cities in Japan from the `CITY` table.
+- **Selected Column**:
+  - `NAME`: Selects only the names of the cities from the `CITY` table.
+- **Data Source**:
+  - `FROM CITY`: Pulls data from the `CITY` table.
+- **Filtering**:
+  - `WHERE UPPER(COUNTRYCODE) = 'JPN'`: Filters the results to include only records where the `COUNTRYCODE` is 'JPN'.
+  The `UPPER()` function ensures a case-insensitive comparison, so it matches 'JPN' even if stored in lowercase or mixed case.
+
+

@@ -1,0 +1,30 @@
+# Question 1: Revising the Select Query
+
+**Platform:** HackerRank
+
+**Difficulty:** Basic
+
+**Problem Statement**
+
+Query all columns for all American cities in the CITY table with populations larger than 100000.
+The CountryCode for America is USA.
+
+### Solution
+
+SELECT *
+FROM CITY
+WHERE UPPER(COUNTRYCODE) = 'USA' AND POPULATION > 100000
+
+### Explanation
+
+- **Purpose**: Retrieves all records of cities in the USA with a population greater than 100,000.
+- **Selected Columns**:
+  - `*`: Selects all columns from the `CITY` table.
+- **Data Source**:
+  - `FROM CITY`: Pulls data from the `CITY` table.
+- **Filtering**:
+  - `WHERE UPPER(COUNTRYCODE) = 'USA'`: Ensures the `COUNTRYCODE` matches 'USA', case-insensitively, by converting the column value to uppercase for comparison.
+  - `AND POPULATION > 100000`: Further filters the results to include only cities with a population greater than 100,000.
+
+
+

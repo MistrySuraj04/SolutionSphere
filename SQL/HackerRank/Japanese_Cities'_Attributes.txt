@@ -1,0 +1,28 @@
+# Question 5: Japanese Cities' Attributes
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Query all attributes of every Japanese city in the CITY table. The COUNTRYCODE for Japan is JPN.
+
+### Solution
+
+SELECT *
+FROM CITY
+WHERE UPPER(COUNTRYCODE) = 'JPN';
+
+### Explanation
+
+- **Purpose**: Retrieves all records of cities in Japan from the `CITY` table.
+- **Selected Columns**:
+  - `*`: Selects all columns from the `CITY` table for the matching records.
+- **Data Source**:
+  - `FROM CITY`: Pulls data from the `CITY` table.
+- **Filtering**:
+  - `WHERE UPPER(COUNTRYCODE) = 'JPN'`: Filters the results to include only cities where the `COUNTRYCODE` is 'JPN'.
+  The `UPPER()` function ensures a case-insensitive comparison, so even if the `COUNTRYCODE` is stored in lowercase or mixed case, it will still match 'JPN'.
+
+

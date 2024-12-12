@@ -1,0 +1,41 @@
+# Question 18: Higher Than 75 Marks
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Query the Name of any student in STUDENTS who scored higher than  Marks. Order your output by the last three characters of each name.
+If two or more students both have names ending in the same last three characters (i.e.: Bobby, Robby, etc.), secondary sort them by ascending ID.
+
+### Solution
+
+SELECT NAME
+FROM STUDENTS
+WHERE MARKS > 75
+ORDER BY RIGHT(NAME, 3), ID;
+
+### Explanation
+
+### **Purpose**:
+The query retrieves the names of students from the `STUDENTS` table where the student's marks are greater than 75, and sorts the results first by the last three characters of their name and then by the student ID.
+
+### **Query Breakdown**:
+1. **Selected Column**:
+   - `NAME`: Selects the name of the student.
+
+2. **Data Source**:
+   - `FROM STUDENTS`: Specifies the `STUDENTS` table as the data source.
+
+3. **Filtering Condition**:
+   - `WHERE MARKS > 75`: Filters the results to include only students whose marks are greater than 75.
+
+4. **Sorting**:
+   - `ORDER BY RIGHT(NAME, 3)`:
+     - `RIGHT(NAME, 3)`: Extracts the last three characters of the student's name and sorts the results by these characters. This means that the query will first sort students based on the last three characters of their name in ascending order.
+   - `ID`: After sorting by the last three characters of the name, the query sorts the results by the student ID in ascending order.
+
+### **Result**:
+The result will be a list of student names with marks greater than 75, ordered first by the last three characters of their name and then by their student ID.
+

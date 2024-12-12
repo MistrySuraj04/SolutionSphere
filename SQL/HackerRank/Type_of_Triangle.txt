@@ -1,0 +1,59 @@
+
+# Question 21: Type of Triangle
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Write a query identifying the type of each record in the TRIANGLES table using its three side lengths. Output one of the following statements for each record in the table:
+
+Equilateral: It's a triangle with  sides of equal length.
+Isosceles: It's a triangle with  sides of equal length.
+Scalene: It's a triangle with  sides of differing lengths.
+Not A Triangle: The given values of A, B, and C don't form a triangle.
+
+### Solution
+
+SELECT CASE
+        WHEN ( A + B <= C OR B + C <= A OR A + C <= B ) THEN 'Not A Triangle'
+        WHEN ( A = B AND B = C ) THEN 'Equilateral'
+        WHEN ( A = B OR B = C OR C = A ) THEN 'Isosceles'
+        WHEN ( A != B AND B != C ) THEN 'Scalene'
+    END
+FROM TRIANGLES;
+
+
+### Explanation
+
+### **Purpose**:
+The query classifies triangles based on the lengths of their sides (`A`, `B`, and `C`) from the `TRIANGLES` table, determining if they form a valid triangle and, if so, which type of triangle (Equilateral, Isosceles, or Scalene) it is.
+
+### **Query Breakdown**:
+1. **Case Statement**:
+   The `CASE` statement is used to evaluate the conditions for each row in the `TRIANGLES` table:
+
+   - **First Condition** (`WHEN ( A + B <= C OR B + C <= A OR A + C <= B )`):
+     - This checks if the sides do **not** form a valid triangle by applying the triangle inequality theorem. If the sum of any two sides is less than or equal to the third side, the result is 'Not A Triangle'.
+
+   - **Second Condition** (`WHEN ( A = B AND B = C )`):
+     - If all three sides are equal (`A = B = C`), the triangle is classified as 'Equilateral'.
+
+   - **Third Condition** (`WHEN ( A = B OR B = C OR C = A )`):
+     - If exactly two sides are equal, the triangle is classified as 'Isosceles'.
+
+   - **Fourth Condition** (`WHEN ( A != B AND B != C )`):
+     - If all three sides are different, the triangle is classified as 'Scalene'.
+
+2. **Data Source**:
+   - `FROM TRIANGLES`: Specifies the `TRIANGLES` table as the source for the data.
+
+### **Result**:
+The result will be a list of classifications for each triangle in the `TRIANGLES` table, which will indicate whether each set of sides forms:
+- 'Not A Triangle' (if the sides don't satisfy the triangle inequality theorem),
+- 'Equilateral' (if all three sides are equal),
+- 'Isosceles' (if two sides are equal),
+- 'Scalene' (if all sides are different).
+
+

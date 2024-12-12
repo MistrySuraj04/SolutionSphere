@@ -1,0 +1,47 @@
+# Question 17: Weather Observation Station 12
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Query the list of CITY names from STATION that do not start with vowels and do not end with vowels.
+Your result cannot contain duplicates.
+
+### Solution
+
+SELECT DISTINCT CITY
+FROM STATION
+WHERE LEFT(CITY, 1) NOT IN ('a', 'e', 'i', 'o', 'u')
+AND RIGHT(CITY, 1) NOT IN ('a', 'e', 'i', 'o', 'u');
+
+### Explanation
+
+### **Purpose**:
+The query retrieves a distinct list of city names from the `STATION` table where **both** the first and last letters of the city name are **not** vowels (A, E, I, O, or U).
+
+### **Query Breakdown**:
+1. **Selected Column**:
+   - `DISTINCT CITY`: Selects unique city names from the `STATION` table, ensuring no duplicates in the result.
+
+2. **Data Source**:
+   - `FROM STATION`: Specifies the `STATION` table as the source for the data.
+
+3. **Filtering Condition**:
+   - `WHERE LEFT(CITY, 1) NOT IN ('a', 'e', 'i', 'o', 'u')`:
+     - `LEFT(CITY, 1)`: Extracts the first character of the city name.
+     - `NOT IN ('a', 'e', 'i', 'o', 'u')`: Filters out cities where the first letter is a vowel ('a', 'e', 'i', 'o', or 'u').
+   - `AND RIGHT(CITY, 1) NOT IN ('a', 'e', 'i', 'o', 'u')`:
+     - `RIGHT(CITY, 1)`: Extracts the last character of the city name.
+     - `NOT IN ('a', 'e', 'i', 'o', 'u')`: Filters out cities where the last letter is a vowel ('a', 'e', 'i', 'o', or 'u').
+   - The `AND` condition means the query will only return cities where **both** the first and last letters are not vowels.
+
+> **Note**: If city names in the `STATION` table are stored with uppercase letters, this query might not work as intended. To make it case-insensitive, you can apply the `LOWER()` function to both the first and last characters like this:
+   - `LOWER(LEFT(CITY, 1)) NOT IN ('a', 'e', 'i', 'o', 'u')`
+   - `LOWER(RIGHT(CITY, 1)) NOT IN ('a', 'e', 'i', 'o', 'u')`
+
+### **Result**:
+The result will be a list of distinct city names from the `STATION` table where **both** the first and last letters of the city's name are **not** vowels (A, E, I, O, or U).
+
+

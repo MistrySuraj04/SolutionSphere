@@ -1,0 +1,28 @@
+# Question 9: Weather Observation Station 4
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Find the difference between the total number of CITY entries in the table and the number of distinct CITY entries in the table.
+
+### Solution
+
+SELECT (COUNT(CITY) - COUNT(DISTINCT CITY))
+FROM STATION;
+
+### Explanation
+
+- **Purpose**: Calculates the number of duplicate city names in the `STATION` table.
+- **Explanation of the Calculation**:
+  - `COUNT(CITY)`: Counts the total number of city entries in the `CITY` column, including duplicates.
+  - `COUNT(DISTINCT CITY)`: Counts the number of unique city names in the `CITY` column, ignoring duplicates.
+  - `(COUNT(CITY) - COUNT(DISTINCT CITY))`: Subtracts the count of distinct city names from the total count of city entries. This difference represents the total number of duplicate city names in the `STATION` table.
+- **Data Source**:
+  - `FROM STATION`: Pulls data from the `STATION` table.
+- **Result**:
+  - The result will be a single value that indicates how many city names are repeated in the `CITY` column.
+
+

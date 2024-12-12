@@ -1,0 +1,26 @@
+# Question 4: Select By Id
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Query all columns for a city in CITY with the ID 1661.
+
+### Solution
+
+SELECT *
+FROM CITY
+WHERE ID = 1661;
+
+### Explanation
+
+- **Purpose**: Retrieves all information for the city with an `ID` of 1661 from the `CITY` table.
+- **Selected Columns**:
+  - `*`: Selects all columns from the `CITY` table for the matching record.
+- **Data Source**:
+  - `FROM CITY`: Pulls data from the `CITY` table.
+- **Filtering**:
+  - `WHERE ID = 1661`: Filters the results to include only the record where the `ID` is equal to 1661.
+  This ensures that only the specific city corresponding to this unique identifier is displayed.
