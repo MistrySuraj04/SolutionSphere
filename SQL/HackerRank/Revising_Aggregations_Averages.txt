@@ -1,0 +1,35 @@
+# Question 24: Revising Aggregations - Averages
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Query the average population of all cities in CITY where District is California.
+
+### Solution
+
+SELECT AVG(POPULATION)
+FROM CITY
+WHERE UPPER(DISTRICT) = 'CALIFORNIA';
+
+### Explanation
+
+### **Purpose**:
+The query calculates the average population of cities in the `CITY` table that are located in the district of California.
+
+### **Query Breakdown**:
+1. **Selected Column**:
+   - `AVG(POPULATION)`: Calculates the average of the `POPULATION` column for the cities that meet the filtering condition. This gives the average population of cities in California.
+
+2. **Data Source**:
+   - `FROM CITY`: Specifies the `CITY` table as the source of the data.
+
+3. **Filtering Condition**:
+   - `WHERE UPPER(DISTRICT) = 'CALIFORNIA'`: Filters the rows where the `DISTRICT` column (converted to uppercase using `UPPER()`) matches `'CALIFORNIA'`. This ensures that the comparison is case-insensitive.
+
+### **Result**:
+The result will be a single value representing the average population of cities located in the district of California in the `CITY` table.
+
+
