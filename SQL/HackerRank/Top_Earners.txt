@@ -1,0 +1,91 @@
+# Question 29: Top Earners
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+We define an employee's total earnings to be their monthly  worked,
+and the maximum total earnings to be the maximum total earnings for any employee in the Employee table. Write a query to find the maximum total earnings for all employees as well as the total number of employees who have maximum total earnings.
+Then print these values as  space-separated integers.
+
+### Solution
+
+SELECT TOP 1 SALARY * MONTHS, COUNT(DISTINCT EMPLOYEE_ID)
+FROM EMPLOYEE
+GROUP BY SALARY * MONTHS
+ORDER BY SALARY * MONTHS DESC;
+
+### Explanation
+
+### **Purpose**:
+The query identifies the highest **total earnings** (calculated as `SALARY * MONTHS`) from the `EMPLOYEE` table and counts how many unique employees have that total earnings value.
+
+---
+
+### **Query Breakdown**:
+1. **Selected Columns**:
+   - **`SALARY * MONTHS`**:
+     - Calculates the total earnings for each employee by multiplying their **SALARY** by **MONTHS**.
+
+   - **`COUNT(DISTINCT EMPLOYEE_ID)`**:
+     - Counts the number of unique employees who have the same total earnings (`SALARY * MONTHS`).
+
+---
+
+2. **Data Source**:
+   - **`FROM EMPLOYEE`**: Specifies the **EMPLOYEE** table as the source of the data.
+
+---
+
+3. **Grouping**:
+   - **`GROUP BY SALARY * MONTHS`**:
+     - Groups the records based on the value of **SALARY * MONTHS**.
+     - Each unique total earnings value is treated as a group, and the count of unique employees in each group is calculated.
+
+---
+
+4. **Ordering**:
+   - **`ORDER BY SALARY * MONTHS DESC`**:
+     - Sorts the grouped total earnings in descending order (highest total earnings first).
+
+---
+
+5. **Limiting Results**:
+   - **`SELECT TOP 1`**:
+     - Returns only the **top 1 result** — the group with the highest **SALARY * MONTHS** value.
+
+---
+
+### **Example Walkthrough**
+| **EMPLOYEE_ID** | **SALARY** | **MONTHS** | **SALARY * MONTHS** |
+|-----------------|------------|------------|---------------------|
+| 1               | 1000       | 12         | 12000               |
+| 2               | 2000       | 12         | 24000               |
+| 3               | 3000       | 12         | 36000               |
+| 4               | 2000       | 12         | 24000               |
+
+**Step-by-step process**:
+- Calculate **SALARY * MONTHS** for each employee.
+- Group by **SALARY * MONTHS**, so the unique groups will be:
+  - **12000**: 1 employee
+  - **24000**: 2 employees (EMPLOYEE_ID 2 and 4)
+  - **36000**: 1 employee
+- Order by **SALARY * MONTHS DESC**:
+  - **36000** (1 employee)
+  - **24000** (2 employees)
+  - **12000** (1 employee)
+- Return only the first row (top 1).
+
+---
+
+### **Result**:
+The result will be a single row with two values:
+1. **The highest total earnings** (`SALARY * MONTHS`).
+2. **The number of distinct employees** who have this highest total earnings.
+
+For the above example, the result would be:
+| **SALARY * MONTHS** | **COUNT(DISTINCT EMPLOYEE_ID)** |
+|---------------------|---------------------------------|
+| **36000**            | **1**                          |

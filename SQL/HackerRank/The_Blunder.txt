@@ -1,0 +1,66 @@
+# Question 28: The Blunder
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Samantha was tasked with calculating the average monthly salaries for all employees in the EMPLOYEES table,
+but did not realize her keyboard's  key was broken until after completing the calculation.
+She wants your help finding the difference between her miscalculation (using salaries with any zeros removed),
+and the actual average salary.
+
+Write a query calculating the amount of error (i.e.:  average monthly salaries), and round it up to the next integer.
+
+### Solution
+
+SELECT CEIL( AVG( SALARY ) - AVG( REPLACE( SALARY, '0', '' ) ) )
+FROM EMPLOYEES;
+
+### Explanation
+
+### **Purpose**:
+The query calculates the difference between the average salary and the average salary with all '0's removed from each salary. It then rounds up this difference to the nearest whole number using the `CEIL()` function.
+
+---
+
+### **Query Breakdown**:
+1. **Selected Column**:
+   - **`AVG(SALARY)`**:
+     - Computes the average of the `SALARY` column for all employees.
+
+   - **`AVG(REPLACE(SALARY, '0', ''))`**:
+     - `REPLACE(SALARY, '0', '')` removes all occurrences of the digit '0' from each salary.
+     - `AVG(...)` calculates the average of these modified salary values.
+
+   - **`AVG(SALARY) - AVG(REPLACE(SALARY, '0', ''))`**:
+     - Subtracts the modified average salary from the original average salary to find the difference.
+
+   - **`CEIL(...)`**:
+     - Rounds **up** the result of the difference to the nearest whole number.
+     - For example, if the difference is **4.3**, `CEIL(4.3)` will return **5**.
+
+---
+
+2. **Data Source**:
+   - `FROM EMPLOYEES`: Specifies the `EMPLOYEES` table as the source of the data.
+
+---
+
+### **How it works**:
+- Suppose the `SALARY` column contains values like:
+  `1000`, `2050`, `3000`
+  The **REPLACE(SALARY, '0', '')** would modify these salaries as:
+  `1000 → 1`, `2050 → 25`, `3000 → 3`
+
+- **Original Average** = (1000 + 2050 + 3000) / 3 = **2016.67**
+- **Modified Average** = (1 + 25 + 3) / 3 = **9.67**
+
+- **Difference** = 2016.67 - 9.67 = **2007**
+- **Ceil(2007)** = **2007** (since it's already a whole number, CEIL does not change it).
+
+---
+
+### **Result**:
+The result will be a single integer value representing the ceiling of the difference between the average salary and the average of the modified salaries (with '0's removed) from the `EMPLOYEES` table.

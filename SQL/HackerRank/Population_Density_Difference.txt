@@ -1,0 +1,32 @@
+# Question 27: Population Density Difference
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Query the difference between the maximum and minimum populations in CITY.
+
+### Solution
+
+SELECT ( MAX(POPULATION) - MIN(POPULATION) )
+FROM CITY;
+
+### Explanation
+
+### **Purpose**:
+The query calculates the difference between the maximum and minimum population of all cities in the `CITY` table.
+
+### **Query Breakdown**:
+1. **Selected Column**:
+   - `(MAX(POPULATION) - MIN(POPULATION))`:
+     - `MAX(POPULATION)`: Finds the highest population among all cities in the `CITY` table.
+     - `MIN(POPULATION)`: Finds the lowest population among all cities in the `CITY` table.
+     - The subtraction `(MAX(POPULATION) - MIN(POPULATION))` calculates the difference between the highest and lowest population values.
+
+2. **Data Source**:
+   - `FROM CITY`: Specifies the `CITY` table as the source of the data.
+
+### **Result**:
+The result will be a single value representing the difference between the maximum and minimum population of all cities listed in the `CITY` table.

@@ -1,0 +1,151 @@
+# Question 001: Weather Observation Station 15
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Query the Western Longitude (LONG_W) for the largest Northern Latitude (LAT_N) in STATION that is less than . Round your answer to  decimal places.
+
+### Solution
+
+SELECT ROUND(LONG_W, 4)
+FROM STATION
+WHERE ROUND(LAT_N, 4) IN (
+    SELECT DISTINCT ROUND(MAX(LAT_N), 4)
+    FROM STATION
+    WHERE LAT_N < 137.2345
+);
+
+### Explanation
+
+### **Purpose**:
+This query retrieves the **longitude (LONG_W)** of the station(s) where the latitude (LAT_N) is equal to the **maximum latitude** that is **less than 137.2345**, with both values rounded to **4 decimal places**.
+
+---
+
+### **Query Breakdown**:
+
+1. **Columns to Retrieve**:
+   ```sql
+   SELECT ROUND(LONG_W, 4)
+   ```
+
+   - **`ROUND(LONG_W, 4)`**:
+     - **Rounds the longitude (LONG_W)** of the matching station(s) to **4 decimal places**.
+     - This ensures the longitude value is displayed with better precision.
+
+---
+
+2. **Data Source**:
+   ```sql
+   FROM STATION
+   ```
+
+   - Specifies the **STATION** table as the source of the data.
+
+---
+
+3. **Filter Condition**:
+   ```sql
+   WHERE ROUND(LAT_N, 4) IN (
+       SELECT DISTINCT ROUND(MAX(LAT_N), 4)
+       FROM STATION
+       WHERE LAT_N < 137.2345
+   )
+   ```
+
+   - **Inner Query**:
+     ```sql
+     SELECT DISTINCT ROUND(MAX(LAT_N), 4)
+     FROM STATION
+     WHERE LAT_N < 137.2345
+     ```
+
+     - This part finds the **maximum latitude (MAX(LAT_N))** from the **STATION** table where **LAT_N is less than 137.2345**.
+     - The **ROUND(MAX(LAT_N), 4)** rounds this maximum latitude value to **4 decimal places**.
+     - **DISTINCT** ensures the result set has no duplicate values.
+
+   - **Outer Query**:
+     ```sql
+     WHERE ROUND(LAT_N, 4) IN (...)
+     ```
+
+     - This part compares the **LAT_N** values in the **STATION** table (after rounding them to **4 decimal places**) to the result from the inner query.
+     - It ensures only the rows where the rounded **LAT_N** matches the **maximum LAT_N** (less than 137.2345) are selected.
+
+---
+
+### **Example Walkthrough**
+
+**STATION Table (example data):**
+
+| **LAT_N** | **LONG_W** |
+|-----------|------------|
+| 39.1234   | 122.5678   |
+| 40.5678   | 123.9876   |
+| 136.9876  | 124.3456   |
+| 137.1000  | 125.1234   |
+| 138.0000  | 121.2345   |
+
+---
+
+### **Query Execution**
+
+1. **Inner Query Execution**:
+   ```sql
+   SELECT DISTINCT ROUND(MAX(LAT_N), 4)
+   FROM STATION
+   WHERE LAT_N < 137.2345
+   ```
+
+   - Filter **LAT_N < 137.2345**. The rows that satisfy this condition are:
+     - **39.1234, 40.5678, 136.9876**
+
+   - Find the **maximum of LAT_N**:
+     - The maximum LAT_N from this list is **136.9876**.
+
+   - Round this value to **4 decimal places**:
+     - `ROUND(136.9876, 4)` = **136.9876**
+
+   - **Result of the inner query**:
+     | **ROUND(MAX(LAT_N), 4)** |
+     |--------------------------|
+     | 136.9876                 |
+
+---
+
+2. **Outer Query Execution**:
+   ```sql
+   SELECT ROUND(LONG_W, 4)
+   FROM STATION
+   WHERE ROUND(LAT_N, 4) IN (136.9876)
+   ```
+
+   - Filter the rows where **ROUND(LAT_N, 4) = 136.9876**.
+   - From the table, **LAT_N = 136.9876** (after rounding) is found in the following row:
+
+     | **LAT_N** | **LONG_W** |
+     |-----------|------------|
+     | 136.9876  | 124.3456   |
+
+   - **ROUND(LONG_W, 4)** = **ROUND(124.3456, 4)** = **124.3456**
+
+---
+
+### **Result**
+The result will be the **longitude (LONG_W)** of the station with the **maximum latitude (LAT_N)** that is **less than 137.2345**, rounded to **4 decimal places**.
+
+| **ROUND(LONG_W, 4)** |
+|----------------------|
+| 124.3456             |
+
+---
+
+### **Summary**
+- The query identifies the **maximum LAT_N** that is less than **137.2345**.
+- It finds the **LONG_W** value for that row, rounded to **4 decimal places**.
+- This query is useful for **geographical analysis**, especially when you need to locate stations or geographical points within a range of latitudes and longitudes.
+
+

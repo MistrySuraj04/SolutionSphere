@@ -1,0 +1,154 @@
+# Question 30: Weather Observation Station 2
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Query the following two values from the STATION table:
+
+1. The sum of all values in LAT_N rounded to a scale of  decimal places.
+2. The sum of all values in LONG_W rounded to a scale of  decimal places.
+
+### Solution
+
+1. The sum of all values in LAT_N rounded to a scale of  decimal places.
+
+SELECT ROUND(SUM(LAT_N), 2), ROUND(SUM(LONG_W), 2)
+FROM STATION;
+
+2. The sum of all values in LONG_W rounded to a scale of  decimal places.
+
+SELECT ROUND(C.A, 2), ROUND(C.B, 2)
+FROM (
+    SELECT SUM(LAT_N) AS A, SUM(LONG_W) AS B
+    FROM STATION
+) AS C;
+
+### Explanation
+
+1. The sum of all values in LAT_N rounded to a scale of  decimal places.
+
+### **Purpose**:
+The query calculates the total sum of the **LAT_N** (latitude) and **LONG_W** (longitude) values from the `STATION` table and rounds each of these sums to **2 decimal places**.
+
+---
+
+### **Query Breakdown**:
+1. **Selected Columns**:
+   - **`ROUND(SUM(LAT_N), 2)`**:
+     - **`SUM(LAT_N)`**: Calculates the total sum of all the **LAT_N** (latitude) values in the `STATION` table.
+     - **`ROUND(..., 2)`**: Rounds the result of the sum to **2 decimal places**.
+
+   - **`ROUND(SUM(LONG_W), 2)`**:
+     - **`SUM(LONG_W)`**: Calculates the total sum of all the **LONG_W** (longitude) values in the `STATION` table.
+     - **`ROUND(..., 2)`**: Rounds the result of the sum to **2 decimal places**.
+
+---
+
+2. **Data Source**:
+   - **`FROM STATION`**: Specifies the **STATION** table as the source of the data.
+
+---
+
+### **Example Walkthrough**
+| **LAT_N**  | **LONG_W**  |
+|------------|-------------|
+| 12.3456    | 78.9012     |
+| 23.4567    | 89.0123     |
+| 34.5678    | 67.8901     |
+
+**Step-by-step process**:
+1. **SUM(LAT_N)** = 12.3456 + 23.4567 + 34.5678 = **70.3701**
+2. **SUM(LONG_W)** = 78.9012 + 89.0123 + 67.8901 = **235.8036**
+3. **ROUND(SUM(LAT_N), 2)** = **70.37** (rounded to 2 decimal places)
+4. **ROUND(SUM(LONG_W), 2)** = **235.80** (rounded to 2 decimal places)
+
+---
+
+### **Result**:
+The result will be a single row with two values:
+1. The **rounded sum of LAT_N** (latitude) to 2 decimal places.
+2. The **rounded sum of LONG_W** (longitude) to 2 decimal places.
+
+For the above example, the result would be:
+| **SUM(LAT_N) (rounded)** | **SUM(LONG_W) (rounded)** |
+|--------------------------|---------------------------|
+| **70.37**                 | **235.80**                |
+
+2. The sum of all values in LONG_W rounded to a scale of  decimal places.
+
+### **Purpose**:
+The query calculates the total sum of **LAT_N** (latitude) and **LONG_W** (longitude) from the **STATION** table and rounds these sums to **2 decimal places**. The use of a **subquery (C)** makes the query more structured and modular.
+
+---
+
+### **Query Breakdown**:
+1. **Inner Subquery** (`C`):
+   ```sql
+   SELECT SUM(LAT_N) AS A, SUM(LONG_W) AS B
+   FROM STATION
+   ```
+   - **`SUM(LAT_N) AS A`**:
+     - Calculates the total sum of all the **LAT_N** (latitude) values in the `STATION` table and labels it as **A**.
+
+   - **`SUM(LONG_W) AS B`**:
+     - Calculates the total sum of all the **LONG_W** (longitude) values in the `STATION` table and labels it as **B**.
+
+   - The result of this subquery is a temporary table **C** with two columns:
+     | **A (SUM of LAT_N)** | **B (SUM of LONG_W)** |
+     |----------------------|----------------------|
+     | 70.3701               | 235.8036             |
+
+---
+
+2. **Outer Query**:
+   ```sql
+   SELECT ROUND(C.A, 2), ROUND(C.B, 2)
+   FROM ( ... ) AS C;
+   ```
+   - **`ROUND(C.A, 2)`**:
+     - Rounds the value of **C.A** (the sum of **LAT_N**) to **2 decimal places**.
+
+   - **`ROUND(C.B, 2)`**:
+     - Rounds the value of **C.B** (the sum of **LONG_W**) to **2 decimal places**.
+
+   - The final result will be a single row with two columns containing the rounded sums.
+
+---
+
+### **Example Walkthrough**
+| **LAT_N**  | **LONG_W**  |
+|------------|-------------|
+| 12.3456    | 78.9012     |
+| 23.4567    | 89.0123     |
+| 34.5678    | 67.8901     |
+
+**Step-by-step process**:
+1. **Inner Query (SUMS)**:
+   - **SUM(LAT_N)** = 12.3456 + 23.4567 + 34.5678 = **70.3701**
+   - **SUM(LONG_W)** = 78.9012 + 89.0123 + 67.8901 = **235.8036**
+   Result of the subquery **C**:
+   | **A**        | **B**        |
+   |--------------|--------------|
+   | **70.3701**  | **235.8036**  |
+
+2. **Outer Query (ROUND)**:
+   - **ROUND(C.A, 2)** = **70.37** (round to 2 decimal places)
+   - **ROUND(C.B, 2)** = **235.80** (round to 2 decimal places)
+
+---
+
+### **Result**:
+The result will be a single row with two values:
+| **SUM(LAT_N) (rounded)** | **SUM(LONG_W) (rounded)** |
+|--------------------------|---------------------------|
+| **70.37**                 | **235.80**                |
+
+This query is functionally similar to the following simpler version:
+```sql
+SELECT ROUND(SUM(LAT_N), 2), ROUND(SUM(LONG_W), 2)
+FROM STATION;
+```
+The use of a subquery adds structure, which can be useful for more complex queries.

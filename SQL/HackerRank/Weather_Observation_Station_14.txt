@@ -1,0 +1,96 @@
+# Question 32: Weather Observation Station 14
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Query the greatest value of the Northern Latitudes (LAT_N) from STATION that is less than . Truncate your answer to  decimal places.
+
+### Solution
+
+SELECT ROUND(MAX(LAT_N), 4)
+FROM STATION
+WHERE LAT_N < 137.2345;
+
+### Explanation
+
+### **Purpose**:
+This query finds the **maximum latitude (LAT_N)** from the **STATION** table where the latitude is **less than 137.2345**, and **rounds** the result to **4 decimal places**.
+
+---
+
+### **Query Breakdown**:
+
+1. **Columns to Retrieve**:
+   ```sql
+   SELECT ROUND(MAX(LAT_N), 4)
+   ```
+
+   - **`MAX(LAT_N)`**:
+     - Finds the **maximum value** of **LAT_N** (latitude) from the rows that satisfy the filter condition.
+     - This retrieves the highest latitude value from the stations where **LAT_N < 137.2345**.
+
+   - **`ROUND(..., 4)`**:
+     - Rounds the maximum latitude value to **4 decimal places** for better precision and to match the required format.
+
+---
+
+2. **Data Source**:
+   ```sql
+   FROM STATION
+   ```
+
+   - Specifies the **STATION** table as the source of data.
+
+---
+
+3. **Filter Condition**:
+   ```sql
+   WHERE LAT_N < 137.2345
+   ```
+
+   - This condition filters the rows by selecting only those where **LAT_N** is **less than 137.2345**.
+   - It excludes stations where the latitude is greater than or equal to 137.2345.
+
+---
+
+### **Example Walkthrough**
+
+**STATION Table (example data):**
+
+| **LAT_N** | **LONG_W** |
+|-----------|------------|
+| 39.1234   | 122.5678   |
+| 40.5678   | 123.9876   |
+| 138.0000  | 121.2345   |
+| 136.9876  | 122.3456   |
+| 137.1000  | 123.1234   |
+
+---
+
+### **Query Execution**:
+1. **Filter the rows**:
+   - The condition `LAT_N < 137.2345` will select the following rows:
+     - **39.1234, 40.5678, 136.9876, 137.1000**
+   - It excludes **138.0000** as it does not satisfy `LAT_N < 137.2345`.
+
+2. **Find the maximum LAT_N**:
+   - The **maximum** of the selected LAT_N values is **137.1000**.
+
+3. **Round the result to 4 decimal places**:
+   - `ROUND(137.1000, 4)` will return **137.1000** (since it is already at 4 decimal places).
+
+---
+
+### **Result**:
+The result will be the **maximum LAT_N** value, rounded to 4 decimal places:
+
+| **ROUND(MAX(LAT_N), 4)** |
+|--------------------------|
+| 137.1000                 |
+
+---
+
+This query is useful when you need to find the **maximum latitude** from a set of records with a **given condition** (in this case, `LAT_N < 137.2345`), and you want the result to be presented with a **precision of 4 decimal places**.

@@ -1,0 +1,33 @@
+# Question 25: Average Population
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Query the average population for all cities in CITY, rounded down to the nearest integer.
+
+### Solution
+
+SELECT FLOOR(AVG(POPULATION))
+FROM CITY;
+
+### Explanation
+
+### **Purpose**:
+The query calculates the average population of all cities in the `CITY` table and rounds it down to the nearest whole number using the `FLOOR()` function.
+
+### **Query Breakdown**:
+1. **Selected Column**:
+   - `FLOOR(AVG(POPULATION))`:
+     - `AVG(POPULATION)`: Calculates the average population of all cities in the `CITY` table.
+     - `FLOOR()`: Rounds the result of the average down to the nearest whole number. For example, if the average is **12345.67**, `FLOOR()` will return **12345**.
+
+2. **Data Source**:
+   - `FROM CITY`: Specifies the `CITY` table as the source of the data.
+
+### **Result**:
+The result will be a single integer value representing the average population of all cities in the `CITY` table, rounded down to the nearest whole number.
+
+

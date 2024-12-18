@@ -1,0 +1,96 @@
+# Question 31: Weather Observation Station 13
+
+**Platform:** HackerRank
+
+**Difficulty:** Medium
+
+**Problem Statement**
+
+Query the sum of Northern Latitudes (LAT_N) from STATION having values greater than  and less than .
+Truncate your answer to  decimal places.
+
+### Solution
+
+SELECT ROUND(SUM(LAT_N), 4)
+FROM STATION
+WHERE LAT_N > 38.7880 AND LAT_N < 137.2345;
+
+### Explanation
+
+### **Purpose**:
+The query calculates the **sum of the `LAT_N` values** (latitude) in the **STATION** table for records where the `LAT_N` is within the specified range (greater than 38.7880 and less than 137.2345), and **rounds** the result to **4 decimal places**.
+
+---
+
+### **Query Breakdown**:
+
+1. **Columns to Retrieve**:
+   ```sql
+   SELECT ROUND(SUM(LAT_N), 4)
+   ```
+
+   - **`SUM(LAT_N)`**:
+     - Sums up the **`LAT_N`** values (latitude) from the **STATION** table for the rows that satisfy the filter condition.
+     - This calculates the **total latitude** of the stations within the specified range.
+
+   - **`ROUND(..., 4)`**:
+     - Rounds the resulting sum of latitudes to **4 decimal places** for precision.
+
+---
+
+2. **Data Source**:
+   ```sql
+   FROM STATION
+   ```
+
+   - Specifies the **STATION** table as the source for the data.
+
+---
+
+3. **Filter Condition**:
+   ```sql
+   WHERE LAT_N > 38.7880 AND LAT_N < 137.2345
+   ```
+
+   - Filters the **LAT_N** values to include only those that are **greater than 38.7880** and **less than 137.2345**.
+   - This ensures that only latitudes within a specific range are considered for the sum.
+
+---
+
+### **Example Walkthrough**
+
+**STATION Table (example data):**
+
+| **LAT_N** | **LONG_W** |
+|-----------|------------|
+| 39.1234   | 122.5678   |
+| 40.5678   | 123.9876   |
+| 38.0000   | 121.2345   |
+| 37.5000   | 124.0000   |
+| 136.9876  | 122.3456   |
+
+---
+
+### **Query Execution**:
+1. **Filter the rows**:
+   - The condition `LAT_N > 38.7880 AND LAT_N < 137.2345` will select the rows with the following `LAT_N` values:
+     - 39.1234, 40.5678, 38.0000, and 136.9876
+
+2. **Sum the selected `LAT_N` values**:
+   - **39.1234 + 40.5678 + 38.0000 + 136.9876** = **254.6788**
+
+3. **Round the result to 4 decimal places**:
+   - `ROUND(254.6788, 4)` will return **254.6788** (since it is already at 4 decimal places).
+
+---
+
+### **Result**:
+The result will be the rounded sum of `LAT_N` values for the stations within the specified latitude range:
+
+| **ROUND(SUM(LAT_N), 4)** |
+|-------------------------|
+| 254.6788                |
+
+---
+
+This query is useful when you need to calculate the **total latitude** of locations (stations, in this case) within a specific **latitude range**, with the precision of **4 decimal places**.
